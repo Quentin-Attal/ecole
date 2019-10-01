@@ -1,0 +1,24 @@
+Admin : Admin@mail.fr mot de passe 1234
+User : Test@mail.fr mot de passe 1234
+
+Pour bien faire fonctionner besoin d'activer rewrite_module sur serveur Apache pour la redirection.
+Besoin d'internet pour bootstrap
+
+Index.php page d'accueil
+Page.php classe qui permet de creer tout ce qui est en commun au page
+Account page du compte
+Command page pour la commande
+rewriting permet la redirection vers la bonne page
+categorie page contenant des info utiliser en ajax par index quand on clic sur une categorie
+item2 page contenant des info utiliser en ajax par index quand on clic sur un item
+Add utiliser lorsque l'on ajoute un item ou l'on retire
+error 404 quand la page chercher n'existe pas
+fpdf librairie utiliser pour le pdf comme font et makefont
+Login page pour se connecter
+Logout page pour se deconnecter
+Pay page quand on a payer
+PDF page qui creer le pdf du reçu
+Register page quand on s'enregistre
+signin.css css de bootstrap pour mes form
+supjeans.sql.zip base de donnée sql
+Transaction page qui permet a l'admin de modifier les information du reçu
