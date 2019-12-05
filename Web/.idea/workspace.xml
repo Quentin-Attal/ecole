@@ -5,7 +5,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casse-Brique/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Casse-Brique/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casse-Brique/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Page.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casse-Brique/PageTest.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,6 +35,11 @@
     <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="last_opened_file_path" value="D:/wamp64/bin/php/php7.4.0/php.exe" />
     <property name="settings.editor.selected.configurable" value="php.test.frameworks.configurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\enfer\Documents\GitHub\ecole\Web" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -69,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575551401995</updated>
-      <workItem from="1575551403236" duration="3924000" />
+      <workItem from="1575551403236" duration="5277000" />
     </task>
     <servers />
   </component>

@@ -8,12 +8,12 @@ use PDO;
 
 class Page
 {
-    private $name;
+    private string $name;
 
     private function head()
     {
         echo "<html lang='fr'><head><title>" . $this->name . "</title><meta charset='UTF-16'>" .
-            "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">" .
+            "<link rel=\"stylesheet\" href=\"Bootstratp/css/bootstrap.css\" " .
             "</head>";
     }
 
@@ -29,10 +29,21 @@ class Page
         return $bdd;
     }
 
-    public function Page()
-    {
-        $this->name = basename(__FILE__);
+
+    function __construct() {
+        $a = func_get_args();
+        $i = func_num_args();
+        if (method_exists($this,$f='__construct'.$i)) {
+            call_user_func_array(array($this,$f),$a);
+        }
+        else{
+            $this->name = "Page";
+            $this->head();
+        }
+
+    }
+    function __construct1($PageName) {
+        $this->name = $PageName;
         $this->head();
-        echo "<body></body>";
     }
 }
