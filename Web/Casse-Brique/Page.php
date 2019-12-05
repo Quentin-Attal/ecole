@@ -13,7 +13,7 @@ class Page
     private function head()
     {
         echo "<html lang='fr'><head><title>" . $this->name . "</title><meta charset='UTF-16'>" .
-            "<link rel=\"stylesheet\" href=\"Bootstratp/css/bootstrap.css\" " .
+            "<link rel='stylesheet' href=\"../Bootstratp/css/bootstrap.min.css\">" .
             "</head>";
     }
 

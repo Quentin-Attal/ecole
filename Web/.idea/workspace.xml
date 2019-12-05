@@ -5,8 +5,8 @@
       <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casse-Brique/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Casse-Brique/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Page.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casse-Brique/PageTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Page.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +38,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\enfer\Documents\GitHub\ecole\Web\Casse-Brique" />
       <recent name="C:\Users\enfer\Documents\GitHub\ecole\Web" />
     </key>
   </component>
@@ -74,7 +75,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575551401995</updated>
-      <workItem from="1575551403236" duration="5277000" />
+      <workItem from="1575551403236" duration="6373000" />
     </task>
     <servers />
   </component>
