@@ -1,0 +1,26 @@
+#balle {
+    width: 1em;
+    height: 1em;
+}
+@media screen and (max-width: 1200px){
+    #balle {
+        width: 0.75em;
+        height: 0.75em;
+    }
+}
+@media screen and (max-width: 900px){
+    #balle {
+        width: 0.5em;
+        height: 0.5em;
+    }
+}
+@media screen and (max-width: 600px){
+    #balle {
+        width: 0.25em;
+        height: 0.25em;
+    }
+}
+#Barre {
+    height: 100%;
+    width: 125%;
+}

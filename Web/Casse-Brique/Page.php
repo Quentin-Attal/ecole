@@ -14,6 +14,7 @@ class Page
     {
         echo "<html lang='fr'><head><title>" . $this->name . "</title><meta charset='UTF-16'>" .
             "<link rel='stylesheet' href=\"../Bootstratp/css/bootstrap.min.css\">" .
+            "<link rel='stylesheet' href=\"../Element.css\">" .
             "</head>";
     }
 

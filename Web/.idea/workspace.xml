@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa82b35d-52e1-4adb-b624-508906fe9dca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Element.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bootstratp/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Bootstratp/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bootstratp/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Bootstratp/css/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casse-Brique/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casse-Brique/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Casse-Brique/Page.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +18,13 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -33,6 +41,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="last_opened_file_path" value="D:/wamp64/bin/php/php7.4.0/php.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="php.test.frameworks.configurable" />
   </component>
   <component name="RecentsManager">
@@ -76,7 +85,7 @@
       <updated>1575551401995</updated>
       <workItem from="1575551403236" duration="12546000" />
       <workItem from="1575580621583" duration="5626000" />
-      <workItem from="1575728270589" duration="11801000" />
+      <workItem from="1575728270589" duration="20628000" />
     </task>
     <servers />
   </component>

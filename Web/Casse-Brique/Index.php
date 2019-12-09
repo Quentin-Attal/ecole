@@ -26,17 +26,17 @@ $page = new \Page\Page(basename(__FILE__));
     </h1>
 
     <div class="container-fluid m-auto p-2">
-        <div class="row h-75 w-100">
+        <div class="row h-75 w-100" id="Element_left">
             <div class="col-3 m-auto text-md-center">
-                <button class="btn btn-lg rounded">Start</button>
+                <button class="btn btn-lg rounded" onclick="Start()">Start</button>
                 <br><br>
                 <button class="btn btn-lg rounded">Restart</button>
                 <br><br>
-                <p class="text-light">Nombre de vie restante : <span>3</span></p>
+                <p class="text-light">Nombre de vie restante : <span id="life">3</span></p>
             </div>
             <div class="col-6 text-md-center">
                 <div>
-                    <table class="border border-primary table-bordered w-100 h-100">
+                    <table class="border border-primary w-100 h-100">
                         <tbody id="table">
                         </tbody>
                     </table>
@@ -53,12 +53,36 @@ $page = new \Page\Page(basename(__FILE__));
 </body>
 
 <script>
-    window.onload = function () {
-        CreateTable(document.getElementById("table"));
-    };
+
     let numbTr = 10;
     let numbTd = 7;
     let start = false;
+    let Brique_class = [];
+    document.getElementById("table").parentNode.addEventListener("mousemove", function (event) {
+        Move(event);
+    });
+
+    window.onload = function () {
+        CreateTable(document.getElementById("table"));
+    };
+
+    window.onresize = function () {
+        if (start === false) {
+            let Balle = document.getElementById("balle");
+            let Barre = document.getElementById("barre");
+            Balle.style.bottom = Barre.offsetHeight + Balle.offsetHeight + 1 + 'px';
+        }
+    };
+
+    class Brique{
+        constructor(obj){
+            let Table = document.getElementById("table");
+            this.Min_Width = obj.offsetLeft * 100 / Table.offsetWidth ;
+            this.Max_Width = obj.offsetLeft * 100 / Table.offsetWidth + obj.clientWidth * 100 / Table.offsetWidth;
+            this.Min_Height = obj.offsetTop * 100 / Table.offsetHeight ;
+            this.Max_Height = obj.offsetTop * 100 / Table.offsetHeight + obj.clientHeight * 100 / Table.offsetHeight;
+        }
+    }
 
     function CreateTable(element) {
         for (let i = 0; i < numbTd; i++) {
@@ -94,6 +118,14 @@ $page = new \Page\Page(basename(__FILE__));
             }
             element.appendChild(obj);
         }
+
+        for (let i = 0; element.parentNode.rows[i]; i++) {
+            for (let j = 0; element.parentNode.rows[i].cells[j]; j++) {
+                if (element.parentNode.rows[i].cells[j].className !== "border-0")
+                Brique_class.push(new Brique(element.parentNode.rows[i].cells[j]));
+            }
+        }
+
         for (let i = 0; i < numbTd; i++) {
             let bas = document.createElement("tr");
             let ghost = document.createElement("td");
@@ -101,31 +133,28 @@ $page = new \Page\Page(basename(__FILE__));
             bas.appendChild(ghost);
             element.appendChild(bas);
         }
+
+
+
         let bas = document.createElement("tr");
         let Barre = document.createElement("div");
-        Barre.className += "border-0 position-relative bg-light";
-        Barre.style += ";height: 100%; width: 125%;";
+        Barre.className += "border-0 position-relative bg-light rounded";
         Barre.id = "barre";
+        Barre.style.left = '0px';
         bas.appendChild(Barre);
         let Balle = document.createElement("div");
         Balle.id = "balle";
         Balle.className += "border-0 position-relative bg-danger rounded-circle";
-        Balle.style += ";width: 1em;height:1em";
         document.getElementById("table").parentNode.parentNode.appendChild(Balle);
         element.appendChild(bas);
         Balle.style.left = Barre.offsetWidth / 2 - Balle.offsetWidth / 2 + 'px';
-        Balle.style.bottom = Barre.offsetHeight + Balle.offsetHeight + 1 +  'px';
+        Balle.style.bottom = Barre.offsetHeight + Balle.offsetHeight + 1 + 'px';
     }
-
-    document.getElementById("table").parentNode.addEventListener("mousemove", function (event) {
-        Move(event);
-    });
 
     function Move(Element) {
         let ObjWidth = document.getElementById("table").parentNode;
         let ObjLeft = document.getElementById("table").parentNode.parentNode.parentNode;
         let barre = document.getElementById("barre");
-        let Balle = document.getElementById("balle");
 
         if ((Element.clientX - ObjLeft.offsetLeft - barre.offsetWidth / 2) >= 0 &&
             ObjWidth.offsetWidth + ObjLeft.offsetLeft >= Element.clientX + barre.offsetWidth / 2) {
@@ -141,11 +170,50 @@ $page = new \Page\Page(basename(__FILE__));
             barre.style.left = '0px';
         }
 
-        if (!start) {
-
+        if (start === false) {
+            let Balle = document.getElementById("balle");
             Balle.style.left = parseInt(barre.style.left) + barre.offsetWidth / 2 - Balle.offsetWidth / 2 + 'px';
 
         }
     }
 
+    function Start() {
+        if (start === false) {
+            Game();
+            start = true;
+        }
+    }
+
+    function Game() {
+        let minBottom = document.getElementById("balle").style.bottom =
+            parseInt(document.getElementById("balle").style.bottom) * 100 / document.getElementById("table").offsetHeight + "%";
+        let minLeft = document.getElementById("balle").style.left =
+            parseInt(document.getElementById("balle").style.left) * 100 / document.getElementById("table").offsetWidth + "%";
+        let up = true;
+        let game = true;
+        let Balle = document.getElementById("balle");
+        let Barre = document.getElementById("barre");
+        let Table = document.getElementById("table");
+        setInterval(function () {
+            if (game) {
+                if (parseInt(Balle.style.bottom) >= 100 - parseInt(minBottom)) {
+                    up = false;
+                } else if (parseInt(Balle.style.bottom) <= parseInt(minBottom)) {
+                    if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 2
+                        && parseInt(Balle.style.left) - 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
+                            Barre.clientWidth * 100 / Table.offsetWidth)) {
+                        up = true;
+                    } else {
+                        game = false;
+                    }
+                }
+                if (up) {
+                    Balle.style.bottom = parseInt(Balle.style.bottom) + 1 + "%";
+
+                } else {
+                    Balle.style.bottom = parseInt(Balle.style.bottom) - 1 + "%";
+                }
+            }
+        }, 10);
+    }
 </script>
