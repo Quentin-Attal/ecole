@@ -74,22 +74,25 @@ $page = new \Page\Page(basename(__FILE__));
         }
     };
 
-    class Brique{
-        constructor(obj){
+    class Brique {
+        constructor(obj) {
             let Table = document.getElementById("table");
-            this.Min_Width = obj.offsetLeft * 100 / Table.offsetWidth ;
+            this.Min_Width = obj.offsetLeft * 100 / Table.offsetWidth;
             this.Max_Width = obj.offsetLeft * 100 / Table.offsetWidth + obj.clientWidth * 100 / Table.offsetWidth;
-            this.Min_Height = obj.offsetTop * 100 / Table.offsetHeight ;
+            this.Min_Height = obj.offsetTop * 100 / Table.offsetHeight;
             this.Max_Height = obj.offsetTop * 100 / Table.offsetHeight + obj.clientHeight * 100 / Table.offsetHeight;
             this.obj = obj;
         }
-        check_Height(){
-            return [this.Min_Height,this.Max_Height];
+
+        check_Height() {
+            return [this.Min_Height, this.Max_Height];
         }
-        check_Width(){
-            return [this.Min_Width,this.Max_Width];
+
+        check_Width() {
+            return [this.Min_Width, this.Max_Width];
         }
-        Object(){
+
+        Object() {
             return this.obj;
         }
     }
@@ -130,7 +133,6 @@ $page = new \Page\Page(basename(__FILE__));
         }
 
 
-
         for (let i = 0; i < numbTd; i++) {
             let bas = document.createElement("tr");
             let ghost = document.createElement("td");
@@ -138,7 +140,6 @@ $page = new \Page\Page(basename(__FILE__));
             bas.appendChild(ghost);
             element.appendChild(bas);
         }
-
 
 
         let bas = document.createElement("tr");
@@ -157,7 +158,7 @@ $page = new \Page\Page(basename(__FILE__));
 
         for (let i = 0; element.parentNode.rows[i]; i++) {
             for (let j = 0; element.parentNode.rows[i].cells[j]; j++) {
-                if (element.parentNode.rows[i].cells[j].className !== "border-0"){
+                if (element.parentNode.rows[i].cells[j].className !== "border-0") {
                     Brique_class.push(new Brique(element.parentNode.rows[i].cells[j]));
                 }
             }
@@ -207,6 +208,8 @@ $page = new \Page\Page(basename(__FILE__));
         let score = parseInt(change_score.innerText);
         let up = true;
         let game = true;
+        let diag = 0;
+        let power_up = 1;
         let Balle = document.getElementById("balle");
         let Barre = document.getElementById("barre");
         let Table = document.getElementById("table");
@@ -214,46 +217,69 @@ $page = new \Page\Page(basename(__FILE__));
             if (game) {
                 if (parseInt(Balle.style.bottom) >= 100 - parseInt(minBottom)) {
                     up = false;
-                } else if (parseInt(Balle.style.bottom) <= parseInt(minBottom)) {
-                    if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 2
-                        && parseInt(Balle.style.left) - 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
+                } else if (parseInt(Balle.style.bottom) <= parseInt(minBottom) && up === false) {
+                    if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) - 2
+                        && parseInt(Balle.style.left) + 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
                             Barre.clientWidth * 100 / Table.offsetWidth)) {
                         up = true;
-                    } else {
-                        game = false;
+                    } else if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 3
+                        && parseInt(Balle.style.left) <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
+                            Barre.clientWidth/2 * 100 / Table.offsetWidth)) {
+                        up = true;
+                        diag = -diag - 0.5;
+                        power_up = 0.5;
                     }
-                }
-                else{
-                    for (let i = 0;i < Brique_class.length;i++){
+                    else if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 3
+                        && parseInt(Balle.style.left) + 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
+                            Barre.clientWidth/2 * 100 / Table.offsetWidth)) {
+                        up = true;
+                        diag = -diag - 0.5;
+                        power_up = 0.5;
+                    }
+                    else {
+                        up = true;
+
+                        //game = false;
+                    }
+
+                } else if (parseFloat(Balle.style.left) <= 0.5 ||
+                    parseFloat(Balle.style.left) >= 95.5) {
+                    diag = -diag;
+                } else {
+                    for (let i = 0; i < Brique_class.length; i++) {
                         if (up && parseInt(Balle.style.bottom) + 2 > 100 - Brique_class[i].check_Height()[1]
                             && Brique_class[i].check_Width()[0] <= parseInt(Balle.style.left) + 2
-                            &&  parseInt(Balle.style.left) - 2 <=  Brique_class[i].check_Width()[1] ){
+                            && parseInt(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
                             up = false;
                             Brique_class[i].Object().className = "border-0";
-                            Brique_class.splice(i,1);
+                            Brique_class.splice(i, 1);
                             score += 10;
                             change_score.innerText = score.toString();
 
                             break;
-                        }
-                        else if (!up && parseInt(Balle.style.bottom) - 2 > 100 - Brique_class[i].check_Height()[0]
+                        } else if (!up && parseInt(Balle.style.bottom) - 2 > 100 - Brique_class[i].check_Height()[0]
                             && Brique_class[i].check_Width()[0] <= parseInt(Balle.style.left) + 2
-                            &&  parseInt(Balle.style.left) - 2 <=  Brique_class[i].check_Width()[1] ){
+                            && parseInt(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
                             up = true;
                             Brique_class[i].Object().className = "border-0";
-                            Brique_class.splice(i,1);
+                            Brique_class.splice(i, 1);
                             break;
                         }
 
                     }
                 }
+                if (Math.abs(diag) === 2){
+                    diag = 0;
+                    power_up = 1;
+                }
                 if (up) {
-                    Balle.style.bottom = parseInt(Balle.style.bottom) + 1 + "%";
-
+                    Balle.style.bottom = parseFloat(Balle.style.bottom) + power_up + "%";
+                    Balle.style.left = parseFloat(Balle.style.left) + diag + "%";
                 } else {
-                    Balle.style.bottom = (parseInt(Balle.style.bottom) - 1) + "%";
-                    if (Balle.offsetTop > Table.offsetHeight){
-                        Balle.style.bottom = (parseInt(Balle.style.bottom) - 1) + "%";
+                    Balle.style.bottom = (parseFloat(Balle.style.bottom) - power_up) + "%";
+                    Balle.style.left = parseFloat(Balle.style.left) + diag + "%";
+                    if (Balle.offsetTop > Table.offsetHeight) {
+                        Balle.style.bottom = (parseFloat(Balle.style.bottom) - power_up) + "%";
                     }
                 }
             }
