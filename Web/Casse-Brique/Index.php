@@ -36,7 +36,7 @@ $page = new \Page\Page(basename(__FILE__));
             </div>
             <div class="col-6 text-md-center">
                 <div>
-                    <table class="border border-primary w-100 h-100">
+                    <table class="border border-primary w-100 h-100" onclick="Start()">
                         <tbody id="table">
                         </tbody>
                     </table>
@@ -187,7 +187,7 @@ $page = new \Page\Page(basename(__FILE__));
 
         if (start === false) {
             let Balle = document.getElementById("balle");
-            Balle.style.left = parseInt(barre.style.left) + barre.offsetWidth / 2 - Balle.offsetWidth / 2 + 'px';
+            Balle.style.left = parseFloat(barre.style.left) + barre.offsetWidth / 2 - Balle.offsetWidth / 2 + 'px';
 
         }
     }
@@ -201,11 +201,11 @@ $page = new \Page\Page(basename(__FILE__));
 
     function Game() {
         let minBottom = document.getElementById("balle").style.bottom =
-            parseInt(document.getElementById("balle").style.bottom) * 100 / document.getElementById("table").offsetHeight + "%";
+            parseFloat(document.getElementById("balle").style.bottom) * 100 / document.getElementById("table").offsetHeight + "%";
         let minLeft = document.getElementById("balle").style.left =
-            parseInt(document.getElementById("balle").style.left) * 100 / document.getElementById("table").offsetWidth + "%";
+            parseFloat(document.getElementById("balle").style.left) * 100 / document.getElementById("table").offsetWidth + "%";
         let change_score = document.getElementById('score');
-        let score = parseInt(change_score.innerText);
+        let score = parseFloat(change_score.innerText);
         let up = true;
         let game = true;
         let diag = 0;
@@ -215,60 +215,71 @@ $page = new \Page\Page(basename(__FILE__));
         let Table = document.getElementById("table");
         setInterval(function () {
             if (game) {
-                if (parseInt(Balle.style.bottom) >= 100 - parseInt(minBottom)) {
+                if (parseFloat(Balle.style.bottom) >= 100 - parseFloat(minBottom)) {
                     up = false;
-                } else if (parseInt(Balle.style.bottom) <= parseInt(minBottom) && up === false) {
-                    if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) - 2
-                        && parseInt(Balle.style.left) + 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
-                            Barre.clientWidth * 100 / Table.offsetWidth)) {
-                        up = true;
-                    } else if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 3
-                        && parseInt(Balle.style.left) <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
-                            Barre.clientWidth/2 * 100 / Table.offsetWidth)) {
+                } else if (parseFloat(Balle.style.bottom) <= parseFloat(minBottom) && up === false) {
+
+                    if (parseFloat(Barre.style.left) * 100 / Table.offsetWidth <= parseFloat(Balle.style.left) + 2.5
+                        && parseFloat(Balle.style.left) + 2.5 <= (parseFloat(Barre.style.left) + Barre.clientWidth / 4) * 100 / Table.offsetWidth) {
+
                         up = true;
                         diag = -diag - 0.5;
                         power_up = 0.5;
-                    }
-                    else if (parseInt(Barre.style.left) * 100 / Table.offsetWidth <= parseInt(Balle.style.left) + 3
-                        && parseInt(Balle.style.left) + 2 <= (parseInt(Barre.style.left) * 100 / Table.offsetWidth +
-                            Barre.clientWidth/2 * 100 / Table.offsetWidth)) {
+
+                    } else if ((parseFloat(Barre.style.left) + Barre.clientWidth * 0.75) * 100 / Table.offsetWidth <= parseFloat(Balle.style.left)
+                        && parseFloat(Balle.style.left) <= (parseFloat(Barre.style.left) + Barre.clientWidth) * 100 / Table.offsetWidth) {
+
                         up = true;
-                        diag = -diag - 0.5;
+                        diag = diag + 0.5;
                         power_up = 0.5;
-                    }
-                    else {
+                    } else if (parseFloat(Barre.style.left) * 100 / Table.offsetWidth <= parseFloat(Balle.style.left)
+                        && parseFloat(Balle.style.left) <= (parseFloat(Barre.style.left) + Barre.clientWidth) * 100 / Table.offsetWidth) {
+
                         up = true;
 
-                        //game = false;
+                    } else {
+
+                        game = false;
+
                     }
 
                 } else if (parseFloat(Balle.style.left) <= 0.5 ||
                     parseFloat(Balle.style.left) >= 95.5) {
+
                     diag = -diag;
+                    Balle.style.left = parseFloat(Balle.style.left) <= 0.5 ? 0.5 + "%" : 95.5 + " %";
+
                 } else {
                     for (let i = 0; i < Brique_class.length; i++) {
-                        if (up && parseInt(Balle.style.bottom) + 2 > 100 - Brique_class[i].check_Height()[1]
-                            && Brique_class[i].check_Width()[0] <= parseInt(Balle.style.left) + 2
-                            && parseInt(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
+
+                        if (up && parseFloat(Balle.style.bottom) + 2 > 100 - Brique_class[i].check_Height()[1]
+                            && Brique_class[i].check_Width()[0] <= parseFloat(Balle.style.left) + 2
+                            && parseFloat(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
+
                             up = false;
                             Brique_class[i].Object().className = "border-0";
                             Brique_class.splice(i, 1);
                             score += 10;
                             change_score.innerText = score.toString();
-
                             break;
-                        } else if (!up && parseInt(Balle.style.bottom) - 2 > 100 - Brique_class[i].check_Height()[0]
-                            && Brique_class[i].check_Width()[0] <= parseInt(Balle.style.left) + 2
-                            && parseInt(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
+
+                        } else if (!up && parseFloat(Balle.style.bottom) - 2 < 100 - Brique_class[i].check_Height()[0]
+                            && parseFloat(Balle.style.bottom) - 2 > 100 - Brique_class[i].check_Height()[1]
+                            && Brique_class[i].check_Width()[0] <= parseFloat(Balle.style.left) + 2
+                            && parseFloat(Balle.style.left) - 2 <= Brique_class[i].check_Width()[1]) {
+
                             up = true;
                             Brique_class[i].Object().className = "border-0";
                             Brique_class.splice(i, 1);
+                            score += 10;
+                            change_score.innerText = score.toString();
                             break;
+
                         }
 
                     }
                 }
-                if (Math.abs(diag) === 2){
+                if (Math.abs(diag) === 2 || (power_up !== 1 && Math.abs(diag) === 0)) {
                     diag = 0;
                     power_up = 1;
                 }
